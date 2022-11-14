@@ -4,15 +4,16 @@ from pathlib import Path
 
 import click
 import matplotlib.pyplot as plt
-import pandas as pd
 import pystow
-from grape import Graph, GraphVisualizer
-from grape.embedders import SecondOrderLINEEnsmallen
+from embiggen.embedders import SecondOrderLINEEnsmallen
+from embiggen.visualizations import GraphVisualizer
+from ensmallen import Graph
 
 HERE = Path(__file__).parent.resolve()
 EMBEDDINGS_DIRECTORY = HERE.joinpath("embeddings")
 EMBEDDINGS_DIRECTORY.mkdir(exist_ok=True, parents=True)
 
+#: The URL of the OpenCheck ORCID-Twitter follow graph
 url = "https://opencheck.is/scitwitter/orcidgraph"
 
 
@@ -37,10 +38,15 @@ def main():
         name="OpenCheck",
     )
     for name, model_cls, kwargs in models:
+        stub = EMBEDDINGS_DIRECTORY.joinpath(name)
         embedding = model_cls(**kwargs).fit_transform(graph)
-        df = embedding.get_all_node_embedding()[0]
+        df = embedding.get_all_node_embedding()[0].sort_index()
         df.index.name = "orcid"
-        df.to_csv(EMBEDDINGS_DIRECTORY.joinpath(f"{name}.tsv"), sep="\t")
+        df.to_csv(stub.with_suffix(".tsv"), sep="\t")
+        visualizer = GraphVisualizer(graph)
+        fig, *_ = visualizer.fit_and_plot_all(embedding)
+        plt.savefig(stub.with_suffix(".png"), dpi=300)
+        plt.close(fig)
 
 
 if __name__ == "__main__":
