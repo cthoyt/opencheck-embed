@@ -13,6 +13,10 @@ file [here](embeddings/line.tsv) and are regenerated nightly using GitHub Action
 
 ![](embeddings/line.png)
 
+## License
+
+Code in this repository is licensed under the MIT license. The embeddings and charts are licensed under CC0.
+
 ## Citation
 
 If you like GRAPE, please cite:
