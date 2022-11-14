@@ -7,7 +7,7 @@ Data available under CC0 [here](https://opencheck.is/scitwitter/orcidgraph).
 This repository uses [GRAPE](https://github.com/AnacletoLAB/grape) to embedding the OpenCheck ORCID graph (which is
 a *directed graph*) and assign to each ORCID identifier a low-dimensional vector of real numbers that can be used
 for various tasks such as clustering, classification. These embeddings can be downloaded as a TSV
-file [here](embeddings/line.tsv).
+file [here](embeddings/line.tsv) and are regenerated nightly using GitHub Actions.
 
 ## Summary
 
