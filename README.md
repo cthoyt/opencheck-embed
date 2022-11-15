@@ -13,6 +13,18 @@ file [here](embeddings/line.tsv) and are regenerated nightly using GitHub Action
 
 ![](embeddings/line.png)
 
+## Running
+
+The code in this repository is completely reproducible. It is wrapped in `tox` to abstract all
+installation and commands so the embeddings can be recreated with the following commands:
+
+```shell
+git clone https://github.com/cthoyt/opencheck-embed.git
+cd opencheck-embed
+pip install tox
+tox
+```
+
 ## License
 
 Code in this repository is licensed under the MIT license. The embeddings and charts are licensed under CC0.
