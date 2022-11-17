@@ -2,7 +2,7 @@ name: Update Data
 on:
   workflow_dispatch:
   schedule:
-    - cron: "0 0 1 * *"  # once per month
+    - cron: "0 0 * * *"  # once per day
 jobs:
   build:
     runs-on: ubuntu-latest
